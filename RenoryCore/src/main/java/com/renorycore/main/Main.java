@@ -9,7 +9,7 @@ import java.io.FileNotFoundException;
  */
 public class Main {
     public static void main(String[] args) throws FileNotFoundException{
-        CommonFileCms commonFileCms = new CommonFileCms("/home/jplay/test.file");
+        CommonFileCms commonFileCms = new CommonFileCms("");
         System.out.println(commonFileCms.getExtension());
         System.out.println(commonFileCms.getNameWithoutExtension());
     }
