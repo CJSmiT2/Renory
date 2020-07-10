@@ -12,17 +12,9 @@ public class CommonFileCms extends File implements FileCms{
     
     public CommonFileCms(File file) throws FileNotFoundException{
         super(file.getAbsolutePath());
-        validateFile();
+        validFile();
     }
     
-    private void validateFile() throws FileNotFoundException{
-        if(super.getName().contains("[.]+")){
-            throw new RuntimeException("Extension not found in the filename");
-        }
-        if(!super.exists()){
-            throw new FileNotFoundException("Requested file not found");
-        }
-    }
     
     @Override
     public String getExtension(){
@@ -36,4 +28,12 @@ public class CommonFileCms extends File implements FileCms{
         return fileName.substring(0, fileName.lastIndexOf("."));
     }
 
+    private void validFile() throws FileNotFoundException{
+        if(!super.exists()){
+            throw new FileNotFoundException("File '"+super.getAbsolutePath()+"' not found");
+        }
+        if(super.getName().contains("[.]+")){
+            throw new RuntimeException("Extension not found in the file '"+super.getAbsolutePath()+"'");
+        }
+    }
 }
