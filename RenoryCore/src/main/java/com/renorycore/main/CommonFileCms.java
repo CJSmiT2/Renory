@@ -2,6 +2,7 @@ package com.renorycore.main;
 
 import com.renorycore.interfaces.FileCms;
 import java.io.File;
+import java.io.FileNotFoundException;
 
 /**
  *
@@ -9,18 +10,28 @@ import java.io.File;
  */
 public class CommonFileCms implements FileCms {
 
-    CommonFileCms(File tmpFile) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private String extension;
+    private String nameWithoutExtension;
+    
+    CommonFileCms(File tmpFile) throws FileNotFoundException {
+        if(tmpFile.exists()){
+            String fileName = tmpFile.getName();
+            int indexOfDot = fileName.lastIndexOf(".");
+            extension = fileName.substring(indexOfDot + 1);
+            nameWithoutExtension = fileName.substring(0, indexOfDot);
+        }else{
+            throw new FileNotFoundException("Requested file not found");
+        }
     }
 
     @Override
     public String getExtension() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return extension;
     }
 
     @Override
     public String getNameWithoutExtension() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return nameWithoutExtension;
     }
 
 }
