@@ -10,28 +10,28 @@ import java.io.FileNotFoundException;
  */
 public class CommonFileCms implements FileCms {
 
-    private String extension;
-    private String nameWithoutExtension;
+    private File tmpFile;
     
-    CommonFileCms(File tmpFile) throws FileNotFoundException {
-        if(tmpFile.exists()){
-            String fileName = tmpFile.getName();
-            int indexOfDot = fileName.lastIndexOf(".");
-            extension = fileName.substring(indexOfDot + 1);
-            nameWithoutExtension = fileName.substring(0, indexOfDot);
-        }else{
+    CommonFileCms(File tmpFile){
+        this.tmpFile = tmpFile;
+    }
+    
+    public void checkFileExsitence() throws FileNotFoundException{
+        if(!tmpFile.exists()){
             throw new FileNotFoundException("Requested file not found");
         }
     }
 
     @Override
     public String getExtension() {
-        return extension;
+        String fileName = tmpFile.getName();
+        return fileName.substring(fileName.lastIndexOf(".") + 1);
     }
 
     @Override
     public String getNameWithoutExtension() {
-        return nameWithoutExtension;
+        String fileName = tmpFile.getName();
+        return fileName.substring(0, fileName.lastIndexOf("."));
     }
 
 }
