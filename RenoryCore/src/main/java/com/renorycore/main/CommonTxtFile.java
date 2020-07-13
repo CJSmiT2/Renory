@@ -1,47 +1,73 @@
 package com.renorycore.main;
 
 import com.renorycore.interfaces.TxtFile;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author smit
  */
 public class CommonTxtFile extends CommonFileCms implements TxtFile {
-
-    CommonTxtFile(File file) {
+    
+    CommonTxtFile(File file){
         super(file);
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void write(String value) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            FileWriter fileWriter = new FileWriter(this);
+            fileWriter.write(value);
+            fileWriter.flush();
+            fileWriter.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
     public void write(int value) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        write(Integer.toString(value)); 
     }
 
     @Override
     public void write(long value) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        write(Long.toString(value));
     }
 
     @Override
     public String readString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            FileReader fileReader = new FileReader(this);
+            int currentInt;
+            String result = "";
+            while((currentInt = fileReader.read()) != -1){
+                char currentCharacter = (char)currentInt;
+                result += currentCharacter;
+            }
+            return result;
+        } catch (IOException ex){
+            ex.printStackTrace();
+            return null;
+        }
     }
 
     @Override
     public int readInt() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return Integer.parseInt(readString());
     }
 
     @Override
     public long readLong() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return Long.parseLong(readString());
     }
 
 }
