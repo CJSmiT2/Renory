@@ -10,14 +10,14 @@ import java.util.logging.Logger;
  *
  * @author smit
  */
-public class CommonFileCms extends File implements FileCms {
+public class FileCmsImpl extends File implements FileCms {
 
-    public CommonFileCms(File file) {
+    public FileCmsImpl(File file) {
         super(file.getAbsolutePath());
         try {
             validFile();
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(CommonFileCms.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FileCmsImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

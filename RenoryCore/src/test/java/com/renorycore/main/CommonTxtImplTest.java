@@ -11,7 +11,7 @@ import org.junit.Test;
  *
  * @author smit
  */
-public class CommonTxtFileTest {
+public class CommonTxtImplTest {
 
     File tmpFile = new File("/tmp/my_test_file.txt");
 
@@ -28,9 +28,9 @@ public class CommonTxtFileTest {
     @Test
     public void testByString() {
         String expected = "test string";
-        new CommonTxtFile(tmpFile).write(expected);
+        new TxtFileImpl(tmpFile).write(expected);
 
-        String actual = new CommonTxtFile(tmpFile).readString();
+        String actual = new TxtFileImpl(tmpFile).readString();
 
         assertEquals(expected, actual);
     }
@@ -38,9 +38,9 @@ public class CommonTxtFileTest {
     @Test
     public void testByInteger() {
         int expected = 1111;
-        new CommonTxtFile(tmpFile).write(expected);
+        new TxtFileImpl(tmpFile).write(expected);
 
-        int actual = new CommonTxtFile(tmpFile).readInt();
+        int actual = new TxtFileImpl(tmpFile).readInt();
 
         assertEquals(expected, actual);
     }
@@ -48,9 +48,9 @@ public class CommonTxtFileTest {
     @Test
     public void testByLong() {
         long expected = 1010101010101010101l;
-        new CommonTxtFile(tmpFile).write(expected);
+        new TxtFileImpl(tmpFile).write(expected);
 
-        long actual = new CommonTxtFile(tmpFile).readLong();
+        long actual = new TxtFileImpl(tmpFile).readLong();
 
         assertEquals(expected, actual);
     }

@@ -9,14 +9,14 @@ import org.junit.Test;
  *
  * @author smit
  */
-public class CommonFileCmsTest {
+public class FileCmsImplTest {
 
     @Test
     public void test1() throws IOException {
         File tmpFile = new File("/tmp/my_test_file.txt");
         tmpFile.createNewFile();
 
-        CommonFileCms fileCms = new CommonFileCms(tmpFile);
+        FileCmsImpl fileCms = new FileCmsImpl(tmpFile);
 
         String name = fileCms.getNameWithoutExtension();
         String extension = fileCms.getExtension();

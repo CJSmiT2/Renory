@@ -14,9 +14,9 @@ import java.util.logging.Logger;
  *
  * @author smit
  */
-public class CommonTxtFile extends CommonFileCms implements TxtFile {
+public class TxtFileImpl extends FileCmsImpl implements TxtFile {
 
-    CommonTxtFile(File file) {
+    TxtFileImpl(File file) {
         super(file);
     }
 
@@ -51,7 +51,7 @@ public class CommonTxtFile extends CommonFileCms implements TxtFile {
             return br.readLine();
 
         } catch (Exception ex) {
-            Logger.getLogger(CommonTxtFile.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TxtFileImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         throw new RuntimeException("Cant read text from file! file='" + this + "'");
     }
