@@ -80,7 +80,7 @@ public class FolderCmsImplTest {
     
     @Test
     public void moveTest(){
-        FolderCmsImpl folder1 = new FolderCmsImpl(folder);
+        FolderCmsImpl folder1 = new FolderCmsImpl(new File("/tmp/test_folder/second_folder"));
         FolderCmsImpl folder2 = new FolderCmsImpl(new File("/tmp/test_folder/third_folder"));
         folder1.moveTo(folder2);
         
