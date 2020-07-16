@@ -1,8 +1,10 @@
 package com.renorycore.main;
 
+import com.renorycore.interfaces.FileCms;
 import com.renorycore.interfaces.FolderCms;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
@@ -49,7 +51,12 @@ public class FolderCmsImplTest {
     @Test
     public void getFilesTest(){
         FolderCmsImpl folderCms = new FolderCmsImpl(folder);
+        List<FileCms> files = folderCms.getFiles();
+        assertEquals(1, files.size());
         
+        FileCmsImpl file = (FileCmsImpl) files.get(0);
+        String filePath = file.getAbsolutePath();
+        assertEquals("/tmp/test_folder/test_file.txt", filePath);
     }
     
 }
