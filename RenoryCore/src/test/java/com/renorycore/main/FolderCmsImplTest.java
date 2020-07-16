@@ -47,7 +47,7 @@ public class FolderCmsImplTest {
         FolderCmsImpl folderCms = new FolderCmsImpl(folder);
         long totalLength = folderCms.getTotalFilesLength();
         
-        assertEquals(23, totalLength);
+        assertEquals(21, totalLength);
     }
     
     @Test
@@ -64,7 +64,7 @@ public class FolderCmsImplTest {
     @Test
     public void getFilesRecursiveTest(){
         FolderCmsImpl folderCms = new FolderCmsImpl(folder);
-        List<FileCms> files = folderCms.getFiles();
+        List<FileCms> files = folderCms.getFilesRecursive();
         assertEquals(2, files.size());
     }
     
@@ -80,11 +80,11 @@ public class FolderCmsImplTest {
     
     @Test
     public void moveTest(){
-        FolderCmsImpl folder1 = new FolderCmsImpl(new File("/tmp/test_folder/second_folder"));
-        FolderCmsImpl folder2 = new FolderCmsImpl(new File("/tmp/test_folder/third_folder"));
+        FolderCmsImpl folder1 = new FolderCmsImpl(folder);
+        FolderCmsImpl folder2 = new FolderCmsImpl(new File("/tmp/same_folder"));
         folder1.moveTo(folder2);
         
-        TxtFileImpl txtFile = new TxtFileImpl(new File("/tmp/test_folder/third_folder/text_file.txt"));
+        TxtFileImpl txtFile = new TxtFileImpl(new File("/tmp/same_folder/second_folder/text_file.txt"));
         assertTrue(txtFile.exists());
         
         String text = txtFile.readString();
