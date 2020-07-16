@@ -8,8 +8,10 @@ import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -57,6 +59,36 @@ public class FolderCmsImplTest {
         FileCmsImpl file = (FileCmsImpl) files.get(0);
         String filePath = file.getAbsolutePath();
         assertEquals("/tmp/test_folder/test_file.txt", filePath);
+    }
+    
+    @Test
+    public void getFilesRecursiveTest(){
+        FolderCmsImpl folderCms = new FolderCmsImpl(folder);
+        List<FileCms> files = folderCms.getFiles();
+        assertEquals(2, files.size());
+    }
+    
+    @Test
+    public void getFoldersTest(){
+        FolderCmsImpl folderCms = new FolderCmsImpl(folder);
+        List<FolderCms> folders = folderCms.getFolders();
+        assertEquals(1, folders.size());
+        
+        FolderCmsImpl folder = (FolderCmsImpl) folders.get(0);
+        assertEquals("/tmp/test_folder/second_folder", folder.getAbsolutePath());
+    }
+    
+    @Test
+    public void moveTest(){
+        FolderCmsImpl folder1 = new FolderCmsImpl(folder);
+        FolderCmsImpl folder2 = new FolderCmsImpl(new File("/tmp/test_folder/third_folder"));
+        folder1.moveTo(folder2);
+        
+        TxtFileImpl txtFile = new TxtFileImpl(new File("/tmp/test_folder/third_folder/text_file.txt"));
+        assertTrue(txtFile.exists());
+        
+        String text = txtFile.readString();
+        assertEquals("another_text", text);
     }
     
 }

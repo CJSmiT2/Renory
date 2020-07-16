@@ -17,6 +17,4 @@ public interface FolderCms {
     List<FolderCms> getFolders();
 
     void moveTo(FolderCms destination);
-
-    void delete();
 }

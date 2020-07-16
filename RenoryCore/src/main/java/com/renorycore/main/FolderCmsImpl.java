@@ -9,10 +9,11 @@ import java.util.List;
  *
  * @author jplay
  */
-public class FolderCmsImpl implements FolderCms {
+public class FolderCmsImpl extends File implements FolderCms {
     
     public FolderCmsImpl(File file){
-        
+        super(file.getAbsolutePath());
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
     public long getTotalFilesLength(){
@@ -32,10 +33,6 @@ public class FolderCmsImpl implements FolderCms {
     }
     
     public void moveTo(FolderCms destination){
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-    
-    public void delete(){
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }
