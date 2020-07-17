@@ -43,8 +43,9 @@ public class FolderCmsImplTest {
 
     @After
     public void delete() {
-        if (!folder.delete()) {
-            throw new RuntimeException("Cant delete tmp folder! " + folder);
+        if (folder.exists()){
+            FolderCmsImpl folderCms = new FolderCmsImpl(folder);
+            folderCms.recursiveDelete();
         }
     }
 
@@ -96,6 +97,13 @@ public class FolderCmsImplTest {
         String text = txtFile.readString();
         assertEquals("another_text", text);
 
+        assertFalse(folder.exists());
+    }
+    
+    @Test
+    public void recursiveDeleteTest(){
+        FolderCmsImpl folderCms = new FolderCmsImpl(folder);
+        folderCms.recursiveDelete();
         assertFalse(folder.exists());
     }
 

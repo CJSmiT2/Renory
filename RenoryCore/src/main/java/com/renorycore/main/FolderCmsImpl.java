@@ -74,6 +74,18 @@ public class FolderCmsImpl extends File implements FolderCms {
                 new FolderCmsImpl(file).moveTo(new FolderCmsImpl(newFile));
             }
         }
+        this.recursiveDelete();
+    }
+    
+    public void recursiveDelete(){
+        File[] filesAndFolders = this.listFiles();
+        for(File file : filesAndFolders){
+            if(file.isFile()){
+                file.delete();
+            }else{
+                new FolderCmsImpl(file).recursiveDelete();
+            }
+        }
         this.delete();
     }
 }
