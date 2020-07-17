@@ -21,26 +21,31 @@ import org.junit.Test;
  */
 public class FolderCmsImplTest {
     
-    File folder = new File("/tmp/test_folder");
+    File folder;
     
     @Before
     public void init() throws IOException{
+        folder = new File("/tmp/test_folder");
         folder.mkdir();
         File secondFolder = new File("/tmp/test_folder/second_folder");
         secondFolder.mkdir();
         
-        TxtFileImpl txtFile1 = new TxtFileImpl(new File("/tmp/test_folder/test_file.txt"));
-        txtFile1.createNewFile();
+        File file1 = new File("/tmp/test_folder/test_file.txt");
+        file1.createNewFile();
+        TxtFileImpl txtFile1 = new TxtFileImpl(file1);
         txtFile1.write("some_text");
         
-        TxtFileImpl txtFile2 = new TxtFileImpl(new File("/tmp/test_folder/second_folder/text_file.txt"));
-        txtFile2.createNewFile();
+        File file2 = new File("/tmp/test_folder/second_folder/text_file.txt");
+        file2.createNewFile(); 
+        TxtFileImpl txtFile2 = new TxtFileImpl(file2);
         txtFile2.write("another_text");
     }
     
     @After
     public void delete(){
-        folder.delete();
+        if(folder.exists()){
+            folder.delete();
+        }
     }
     
     @Test
