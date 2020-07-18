@@ -12,7 +12,7 @@ import org.junit.Test;
  *
  * @author jplay
  */
-public class ShtoHochesh {
+public class FolderCmsMoveDeleteTest {
     
     File rootTestFolder = new File(File.separator + "tmp" + File.separator + "test_folder" + File.separator);
     
