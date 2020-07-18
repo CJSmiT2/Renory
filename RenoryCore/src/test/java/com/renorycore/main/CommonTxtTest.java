@@ -11,7 +11,7 @@ import org.junit.Test;
  *
  * @author smit
  */
-public class CommonTxtImplTest {
+public class CommonTxtTest {
 
     File tmpFile = new File(File.separator + "tmp" + File.separator + "my_test_file.txt");
 

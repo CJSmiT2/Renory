@@ -12,7 +12,7 @@ import org.junit.Test;
  *
  * @author jplay
  */
-public class FolderCmsImplTest {
+public class FolderCmsTest {
 
     File rootTestFolder = new File(File.separator + "tmp" + File.separator + "test_folder" + File.separator);
 

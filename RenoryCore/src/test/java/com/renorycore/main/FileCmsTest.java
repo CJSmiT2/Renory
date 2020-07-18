@@ -9,7 +9,7 @@ import org.junit.Test;
  *
  * @author smit
  */
-public class FileCmsImplTest {
+public class FileCmsTest {
 
     @Test
     public void test1() throws IOException {
