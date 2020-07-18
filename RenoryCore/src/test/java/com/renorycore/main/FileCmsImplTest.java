@@ -13,10 +13,10 @@ public class FileCmsImplTest {
 
     @Test
     public void test1() throws IOException {
-        File tmpFile = new File("/tmp/my_test_file.txt");
+        File tmpFile = new File(File.separator + "tmp" + File.separator + "my_test_file.txt");
         tmpFile.createNewFile();
 
-        FileCmsImpl fileCms = new FileCmsImpl(tmpFile);
+        FileCms fileCms = new FileCms(tmpFile);
 
         String name = fileCms.getNameWithoutExtension();
         String extension = fileCms.getExtension();

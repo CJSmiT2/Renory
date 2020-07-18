@@ -1,6 +1,5 @@
 package com.renorycore.main;
 
-import com.renorycore.interfaces.TxtFile;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,35 +13,36 @@ import java.util.logging.Logger;
  *
  * @author smit
  */
-public class TxtFileImpl extends FileCmsImpl implements TxtFile {
+public class TxtFileImpl extends FileCms {
 
     TxtFileImpl(File file) {
         super(file);
     }
 
-    @Override
+    TxtFileImpl(String path) {
+        super(path);
+    }
+
     public void write(String value) {
         try {
             try (FileWriter fileWriter = new FileWriter(this)) {
                 fileWriter.write(value);
                 fileWriter.flush();
+                fileWriter.close();
             }
         } catch (IOException ex) {
             throw new RuntimeException("Cant add text to the file! Text = '" + value + "', file='" + this + "'");
         }
     }
 
-    @Override
     public void write(int value) {
         write(Integer.toString(value));
     }
 
-    @Override
     public void write(long value) {
         write(Long.toString(value));
     }
 
-    @Override
     public String readString() {
         try (FileInputStream fstream = new FileInputStream(this);
                 InputStreamReader is = new InputStreamReader(fstream);
@@ -56,12 +56,10 @@ public class TxtFileImpl extends FileCmsImpl implements TxtFile {
         throw new RuntimeException("Cant read text from file! file='" + this + "'");
     }
 
-    @Override
     public int readInt() {
         return Integer.parseInt(readString());
     }
 
-    @Override
     public long readLong() {
         return Long.parseLong(readString());
     }

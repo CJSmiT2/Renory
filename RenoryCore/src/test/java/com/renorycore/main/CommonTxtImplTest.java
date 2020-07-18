@@ -13,7 +13,7 @@ import org.junit.Test;
  */
 public class CommonTxtImplTest {
 
-    File tmpFile = new File("/tmp/my_test_file.txt");
+    File tmpFile = new File(File.separator + "tmp" + File.separator + "my_test_file.txt");
 
     @Before
     public void init() throws IOException {
