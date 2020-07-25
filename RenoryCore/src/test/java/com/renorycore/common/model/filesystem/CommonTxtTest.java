@@ -1,5 +1,7 @@
-package com.renorycore.main;
+package com.renorycore.common.model.filesystem;
 
+import com.renorycore.common.model.filesystem.TxtFile;
+import com.renorycore.main.config.Config;
 import java.io.File;
 import java.io.IOException;
 import org.junit.After;
@@ -13,7 +15,7 @@ import org.junit.Test;
  */
 public class CommonTxtTest {
 
-    File tmpFile = new File(File.separator + "tmp" + File.separator + "my_test_file.txt");
+    File tmpFile = new File(Config.ROOT_DIRECTORY + "my_test_file.txt");
 
     @Before
     public void init() throws IOException {
@@ -28,9 +30,9 @@ public class CommonTxtTest {
     @Test
     public void testByString() {
         String expected = "test string";
-        new TxtFileImpl(tmpFile).write(expected);
+        new TxtFile(tmpFile).write(expected);
 
-        String actual = new TxtFileImpl(tmpFile).readString();
+        String actual = new TxtFile(tmpFile).readString();
 
         assertEquals(expected, actual);
     }
@@ -38,9 +40,9 @@ public class CommonTxtTest {
     @Test
     public void testByInteger() {
         int expected = 1111;
-        new TxtFileImpl(tmpFile).write(expected);
+        new TxtFile(tmpFile).write(expected);
 
-        int actual = new TxtFileImpl(tmpFile).readInt();
+        int actual = new TxtFile(tmpFile).readInt();
 
         assertEquals(expected, actual);
     }
@@ -48,9 +50,9 @@ public class CommonTxtTest {
     @Test
     public void testByLong() {
         long expected = 1010101010101010101l;
-        new TxtFileImpl(tmpFile).write(expected);
+        new TxtFile(tmpFile).write(expected);
 
-        long actual = new TxtFileImpl(tmpFile).readLong();
+        long actual = new TxtFile(tmpFile).readLong();
 
         assertEquals(expected, actual);
     }

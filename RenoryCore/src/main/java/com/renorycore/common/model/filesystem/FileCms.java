@@ -1,4 +1,4 @@
-package com.renorycore.main;
+package com.renorycore.common.model.filesystem;
 
 import java.io.File;
 

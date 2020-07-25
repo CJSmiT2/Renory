@@ -1,4 +1,4 @@
-package com.renorycore.main;
+package com.renorycore.common.model.filesystem;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -13,13 +13,13 @@ import java.util.logging.Logger;
  *
  * @author smit
  */
-public class TxtFileImpl extends FileCms {
+public class TxtFile extends FileCms {
 
-    TxtFileImpl(File file) {
+    public TxtFile(File file) {
         super(file);
     }
 
-    TxtFileImpl(String path) {
+    public TxtFile(String path) {
         super(path);
     }
 
@@ -51,7 +51,7 @@ public class TxtFileImpl extends FileCms {
             return br.readLine();
 
         } catch (Exception ex) {
-            Logger.getLogger(TxtFileImpl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TxtFile.class.getName()).log(Level.SEVERE, null, ex);
         }
         throw new RuntimeException("Cant read text from file! file='" + this + "'");
     }

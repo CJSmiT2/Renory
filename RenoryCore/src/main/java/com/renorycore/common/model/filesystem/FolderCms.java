@@ -1,4 +1,4 @@
-package com.renorycore.main;
+package com.renorycore.common.model.filesystem;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -12,10 +12,12 @@ public class FolderCms extends File {
 
     public FolderCms(File file) {
         super(file.getAbsolutePath());
+        super.mkdirs();
     }
 
     public FolderCms(String path) {
         super(path);
+        super.mkdirs();
     }
 
     public long getTotalFilesLength() {
@@ -76,15 +78,15 @@ public class FolderCms extends File {
             }
         }
 
-        recursiveDelete();
+        deleteRecursive();
     }
 
-    public void recursiveDelete() {
+    public void deleteRecursive() {
         for (File file : listFiles()) {
             if (file.isFile()) {
                 file.delete();
             } else {
-                new FolderCms(file).recursiveDelete();
+                new FolderCms(file).deleteRecursive();
             }
         }
         delete();

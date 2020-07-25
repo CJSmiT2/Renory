@@ -1,4 +1,4 @@
-package com.renorycore.main;
+package com.renorycore.common.model.filesystem;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,21 +13,21 @@ import org.junit.Test;
  * @author jplay
  */
 public class FolderCmsMoveDeleteTest {
-    
+
     File rootTestFolder = new File(File.separator + "tmp" + File.separator + "test_folder" + File.separator);
-    
+
     @Before
-    public void init() throws IOException{
+    public void init() throws IOException {
         new FolderCmsTest().init();
     }
-    
+
     @Test
     public void moveTest() {
         FolderCms folder1 = new FolderCms(rootTestFolder);
         FolderCms folder2 = new FolderCms(new File("/tmp/same_folder"));
         folder1.moveTo(folder2);
 
-        TxtFileImpl txtFile = new TxtFileImpl(new File("/tmp/same_folder/second_folder/text_file.txt"));
+        TxtFile txtFile = new TxtFile(new File("/tmp/same_folder/second_folder/text_file.txt"));
         assertTrue(txtFile.exists());
 
         String text = txtFile.readString();
@@ -39,7 +39,7 @@ public class FolderCmsMoveDeleteTest {
     @Test
     public void recursiveDeleteTest() {
         FolderCms folderCms = new FolderCms(rootTestFolder);
-        folderCms.recursiveDelete();
+        folderCms.deleteRecursive();
         assertFalse(rootTestFolder.exists());
     }
 }
