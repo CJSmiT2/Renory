@@ -18,16 +18,24 @@ public class FolderCmsMoveDeleteTest {
 
     @Before
     public void init() throws IOException {
-        new FolderCmsTest().init();
-    }
+        rootTestFolder.mkdir();
+        File subFolder = new File(rootTestFolder + File.separator + "second_folder");
+        subFolder.mkdirs();
 
+        new TxtFile(rootTestFolder + File.separator + "test_file.txt").write("some_text");
+        new TxtFile(subFolder + File.separator + "text_file.txt").write("another_text");
+    }
+ 
     @Test
     public void moveTest() {
         FolderCms folder1 = new FolderCms(rootTestFolder);
-        FolderCms folder2 = new FolderCms(new File("/tmp/same_folder"));
+        FolderCms folder2 = new FolderCms(new File(File.separator +"tmp" + File.separator + "same_folder"));
         folder1.moveTo(folder2);
 
-        TxtFile txtFile = new TxtFile(new File("/tmp/same_folder/second_folder/text_file.txt"));
+        TxtFile txtFile = new TxtFile(new File(File.separator + "tmp"
+                + File.separator + "same_folder"
+                + File.separator + "second_folder"
+                + File.separator + "text_file.txt"));
         assertTrue(txtFile.exists());
 
         String text = txtFile.readString();

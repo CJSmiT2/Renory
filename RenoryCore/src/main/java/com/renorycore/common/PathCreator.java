@@ -9,11 +9,11 @@ import java.io.File;
  */
 public class PathCreator {
 
-    public String createUniqeFolderName(File dest, Alias alias) {
-        return PathCreator.this.createUniqeFolderName(dest.getAbsolutePath(), alias);
+    public String createUniqueFolderName(File dest, Alias alias) {
+        return PathCreator.this.createUniqueFolderName(dest.getAbsolutePath(), alias);
     }
 
-    public String createUniqeFolderName(String dest, Alias alias) {
+    public String createUniqueFolderName(String dest, Alias alias) {
         String prefix = "";
         int step = 1;
 

@@ -27,7 +27,7 @@ public class Alias extends StringWrap {
         } else if (value.isEmpty()) {
             throw new RuntimeException("Alias cannot be EMPTY!");
         } else if (value.length() > MAX_LENGTH) {
-            throw new RuntimeException("Alias to LONG! " + value);
+            throw new RuntimeException("Alias too LONG! " + value);
         }
 
         value = filterOnlyLettersAndnumbers(value);

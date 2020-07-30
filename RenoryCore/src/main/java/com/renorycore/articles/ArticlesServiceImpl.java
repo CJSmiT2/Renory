@@ -31,7 +31,7 @@ public class ArticlesServiceImpl extends FolderCms implements ArticlesService {
     @Override
     public Category create(Title title) {
         Alias alias = title.createAlias();
-        String uniqeFolderName = new PathCreator().createUniqeFolderName(categoriesFolder, alias);
+        String uniqeFolderName = new PathCreator().createUniqueFolderName(categoriesFolder, alias);
         return new Category(categoriesFolder + File.separator + uniqeFolderName, title);
     }
 

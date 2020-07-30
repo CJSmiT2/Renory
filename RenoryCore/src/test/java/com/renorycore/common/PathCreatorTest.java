@@ -33,19 +33,19 @@ public class PathCreatorTest {
         Alias alias = new Alias("test_alias");
         PathCreator pathCreator = new PathCreator();
 
-        String actualName1 = pathCreator.createUniqeFolderName(rootTestFolder, alias);
+        String actualName1 = pathCreator.createUniqueFolderName(rootTestFolder, alias);
         String expectedName1 = "test_alias";
 
         assertEquals(expectedName1, actualName1);
 
         new File(rootTestFolder + File.separator + expectedName1).mkdir();
-        String actualName2 = pathCreator.createUniqeFolderName(rootTestFolder, alias);
+        String actualName2 = pathCreator.createUniqueFolderName(rootTestFolder, alias);
         String expectedName2 = "test_alias_2";
 
         assertEquals(actualName2, expectedName2);
 
         new File(rootTestFolder + File.separator + expectedName2).mkdir();
-        String actualName3 = pathCreator.createUniqeFolderName(rootTestFolder, alias);
+        String actualName3 = pathCreator.createUniqueFolderName(rootTestFolder, alias);
         String expectedName3 = "test_alias_3";
 
         assertEquals(actualName3, expectedName3);
