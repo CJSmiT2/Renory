@@ -33,4 +33,16 @@ public class Article {
         creationTime.serialization(articleFolder);
     }
 
+    public Title getTitle() {
+        return title;
+    }
+
+    public Text getText() {
+        return text;
+    }
+
+    public CreationTime getCreationTime() {
+        return creationTime;
+    }
+
 }

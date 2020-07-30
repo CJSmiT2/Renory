@@ -108,8 +108,8 @@ public class ArticlesServiceImplTest {
         assertTrue(textFile.exists());
 
         TxtFile textTxtFile = new TxtFile(textFile);
-        String currentTimeString = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(new Date(System.currentTimeMillis()));
-        String savedTimeString = textTxtFile.readString();
-        assertEquals(savedTimeString, currentTimeString);
+        String savedTime= textTxtFile.readString();
+        String actualTime = article.getCreationTime().getValue();
+        assertEquals(actualTime, savedTime);
     }
 }

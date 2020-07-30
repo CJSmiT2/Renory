@@ -24,11 +24,11 @@ public class CreationTime extends StringWrap {
         return DATE_FORMAT.format(new Date(System.currentTimeMillis()));
     }
     
-    public Date parseTime(){
+    public static Date parseTime(String timeString){
         try {
-            return DATE_FORMAT.parse(getValue());
+            return DATE_FORMAT.parse(timeString);
         } catch (ParseException ex) {
-            throw new RuntimeException("Date '" + getValue() + "' cannot be parsed.");           
+            throw new RuntimeException("Date '" + timeString + "' cannot be parsed.");           
         }
     }
 }

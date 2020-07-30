@@ -19,6 +19,7 @@ public class CommonTxtTest {
 
     @Before
     public void init() throws IOException {
+        new File(Config.ROOT_DIRECTORY).mkdir();
         tmpFile.createNewFile();
     }
 
