@@ -3,9 +3,9 @@ package com.renorycore.articles;
 import com.renorycore.common.PathCreator;
 import com.renorycore.common.model.filesystem.FolderCms;
 import com.renorycore.common.model.text.Alias;
-import com.renorycore.common.model.text.CreationTime;
 import com.renorycore.common.model.text.Text;
 import com.renorycore.common.model.text.Title;
+import com.renorycore.common.model.timestamps.CreationTime;
 import java.io.File;
 
 /**
@@ -40,8 +40,8 @@ public class Article {
     public Text getText() {
         return text;
     }
-
-    public CreationTime getCreationTime() {
+    
+    public CreationTime getCreationTime(){
         return creationTime;
     }
 

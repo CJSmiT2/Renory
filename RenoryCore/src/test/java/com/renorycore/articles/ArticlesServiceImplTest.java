@@ -4,12 +4,10 @@ import com.renorycore.main.config.Config;
 import com.renorycore.common.interfaces.ArticlesService;
 import com.renorycore.common.model.filesystem.FolderCms;
 import com.renorycore.common.model.filesystem.TxtFile;
-import com.renorycore.common.model.text.CreationTime;
 import com.renorycore.common.model.text.Text;
 import com.renorycore.common.model.text.Title;
+import com.renorycore.common.model.timestamps.CreationTime;
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -107,9 +105,8 @@ public class ArticlesServiceImplTest {
         File textFile = new File(expectedArticleTextPath);
         assertTrue(textFile.exists());
 
-        TxtFile textTxtFile = new TxtFile(textFile);
-        String savedTime= textTxtFile.readString();
-        String actualTime = article.getCreationTime().getValue();
-        assertEquals(actualTime, savedTime);
+        TxtFile creationTimeFile = new TxtFile(textFile);
+        String actualCreationTime = article.getCreationTime().toString();
+        assertEquals(actualCreationTime, creationTimeFile.readString());
     }
 }
