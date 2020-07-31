@@ -19,6 +19,10 @@ public class StringWrap {
         this.value = value;
         this.fileName = fileName;
     }
+    
+    public StringWrap(TxtFileName fileName){
+        this.fileName = fileName;
+    }
 
     public StringWrap() {
     }
@@ -32,8 +36,15 @@ public class StringWrap {
     }
 
     public void serialization(FolderCms folder) {
-        String filePath = folder + File.separator + fileName.getNameWithExtension();
-        new TxtFile(filePath).write(value);
+        new TxtFile(getFilePath(folder)).write(value);
+    }
+    
+    public void deserialization(FolderCms folder){
+        value = new TxtFile(getFilePath(folder)).readString();
+    }
+    
+    private String getFilePath(FolderCms folder){
+        return folder + File.separator + fileName.getNameWithExtension();
     }
 
     @Override
