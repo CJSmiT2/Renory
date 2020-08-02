@@ -23,4 +23,13 @@ public class CreationTime extends Timestamp {
         wrap.serialization(folder);
     }
     
+    //Альтернативное решение
+    //Да-да-да, знаю, статический метод, расширение класса
+    //В общем говно, ругай, удаляй, переделывай
+    public static CreationTime deserialization(FolderCms folder){
+        CreationTimeWrap wrap = new CreationTimeWrap();
+        wrap.deserialization(folder);
+        return (CreationTime) Timestamp.valueOf(wrap.getValue());
+    }
+    
 }
