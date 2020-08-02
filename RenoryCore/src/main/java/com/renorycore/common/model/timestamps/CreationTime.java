@@ -14,7 +14,7 @@ import java.sql.Timestamp;
  * @author jplay
  */
 public class CreationTime extends Timestamp {
-    public CreationTime(){
+    public CreationTime() {
         super(System.currentTimeMillis());
     }
     

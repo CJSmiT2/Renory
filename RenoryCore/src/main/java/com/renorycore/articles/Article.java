@@ -40,9 +40,5 @@ public class Article {
     public Text getText() {
         return text;
     }
-    
-    public CreationTime getCreationTime(){
-        return creationTime;
-    }
 
 }
