@@ -14,6 +14,10 @@ public class Title extends StringWrap {
         super(value, new TxtFileName(NAME));
     }
 
+    public Title() {
+        super(new TxtFileName(NAME));
+    }
+
     public Alias createAlias() {
         Alias alias = new Alias();
         alias.createAlias(super.getValue());

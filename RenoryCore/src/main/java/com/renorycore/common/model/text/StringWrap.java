@@ -13,14 +13,15 @@ import java.util.Objects;
 public class StringWrap {
 
     private String value;
-    private TxtFileName fileName;
+    private final TxtFileName fileName;
 
     public StringWrap(String value, TxtFileName fileName) {
         this.value = value;
         this.fileName = fileName;
     }
 
-    public StringWrap() {
+    public StringWrap(TxtFileName fileName) {
+        this.fileName = fileName;
     }
 
     public String getValue() {
@@ -32,8 +33,27 @@ public class StringWrap {
     }
 
     public void serialization(FolderCms folder) {
-        String filePath = folder + File.separator + fileName.getNameWithExtension();
-        new TxtFile(filePath).write(value);
+        new TxtFile(getFilePath(folder)).write(value);
+    }
+
+    public void deserialization(FolderCms folder) {
+        value = new TxtFile(getFilePath(folder)).readString();
+    }
+
+    private String getFilePath(FolderCms folder) {
+        return folder + File.separator + fileName.getNameWithExtension();
+    }
+
+    public TxtFileName getFileName() {
+        return fileName;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.value);
+        hash = 37 * hash + Objects.hashCode(this.fileName);
+        return hash;
     }
 
     @Override
@@ -49,6 +69,9 @@ public class StringWrap {
         }
         final StringWrap other = (StringWrap) obj;
         if (!Objects.equals(this.value, other.value)) {
+            return false;
+        }
+        if (!Objects.equals(this.fileName, other.fileName)) {
             return false;
         }
         return true;

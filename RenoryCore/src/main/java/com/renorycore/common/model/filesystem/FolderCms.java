@@ -1,5 +1,6 @@
 package com.renorycore.common.model.filesystem;
 
+import com.renorycore.common.model.text.Alias;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -90,5 +91,9 @@ public class FolderCms extends File {
             }
         }
         delete();
+    }
+
+    public Alias getAlias() {
+        return new Alias(this.getName());
     }
 }

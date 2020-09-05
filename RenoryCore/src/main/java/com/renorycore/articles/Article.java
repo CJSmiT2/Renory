@@ -1,36 +1,45 @@
 package com.renorycore.articles;
 
-import com.renorycore.common.PathCreator;
 import com.renorycore.common.model.filesystem.FolderCms;
-import com.renorycore.common.model.text.Alias;
-import com.renorycore.common.model.text.CreationTime;
 import com.renorycore.common.model.text.Text;
 import com.renorycore.common.model.text.Title;
-import java.io.File;
+import com.renorycore.common.model.timestamps.CreationTime;
 
 /**
  *
  * @author smit
  */
-public class Article {
+public class Article extends FolderCms {
 
     private final Title title;
     private final Text text;
     private final CreationTime creationTime;
 
-    Article(Title title, Text text) {
+    Article(Title title, Text text, FolderCms folder) {
+        super(folder);
         this.title = title;
         this.text = text;
         creationTime = new CreationTime();
     }
 
-    void serialization(Category category) {
-        Alias alias = title.createAlias();
-        String uniqueFolderName = new PathCreator().createUniqueFolderName(category.getAbsolutePath(), alias);
-        FolderCms articleFolder = new FolderCms(category.getAbsolutePath() + File.separator + uniqueFolderName);
-        title.serialization(articleFolder);
-        text.serialization(articleFolder);
-        creationTime.serialization(articleFolder);
+    Article(FolderCms folder) {
+        super(folder);
+        title = new Title();
+        text = new Text();
+        creationTime = new CreationTime();
+        deserialization();
+    }
+
+    void serialization() {
+        title.serialization(this);
+        text.serialization(this);
+        creationTime.serialization(this);
+    }
+
+    private void deserialization() {
+        title.deserialization(this);
+        text.deserialization(this);
+        creationTime.deserialization(this);
     }
 
     public Title getTitle() {

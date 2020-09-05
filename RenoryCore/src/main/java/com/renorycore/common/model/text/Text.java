@@ -14,6 +14,10 @@ public class Text extends StringWrap {
         super(value, new TxtFileName(NAME));
     }
 
+    public Text() {
+        super(new TxtFileName(NAME));
+    }
+
     public boolean isEmpty() {
         return super.getValue() == null || super.getValue().isEmpty();
     }

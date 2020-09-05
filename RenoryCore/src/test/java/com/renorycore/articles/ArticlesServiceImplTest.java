@@ -4,12 +4,10 @@ import com.renorycore.main.config.Config;
 import com.renorycore.common.interfaces.ArticlesService;
 import com.renorycore.common.model.filesystem.FolderCms;
 import com.renorycore.common.model.filesystem.TxtFile;
-import com.renorycore.common.model.text.CreationTime;
+import com.renorycore.common.model.text.Alias;
 import com.renorycore.common.model.text.Text;
 import com.renorycore.common.model.text.Title;
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -31,7 +29,7 @@ public class ArticlesServiceImplTest {
     @Test
     public void createCategiryTest() {
         Title title = new Title("Category title!");
-        Category category = articlesService.create(title);
+        Category category = articlesService.createCategory(title);
 
         String actualPath = category.getAbsolutePath();
 
@@ -47,9 +45,9 @@ public class ArticlesServiceImplTest {
         Title categoryTitle = new Title("category unnecessary");
         Title articleTitle = new Title("Article title!");
         Text text = new Text("unnecessary");
-        Category category = articlesService.create(categoryTitle);
+        Category category = articlesService.createCategory(categoryTitle);
 
-        Article article = articlesService.create(category, articleTitle, text);
+        Article article = articlesService.createArticle(category, articleTitle, text);
 
         String expectedArticleTitlePath = Config.ROOT_DIRECTORY
                 + "articles_service" + File.separator
@@ -70,9 +68,9 @@ public class ArticlesServiceImplTest {
         Title categoryTitle = new Title("category unnecessary");
         Title articleTitle = new Title("title unnecessary");
         Text text = new Text("My test text!..");
-        Category category = articlesService.create(categoryTitle);
+        Category category = articlesService.createCategory(categoryTitle);
 
-        Article article = articlesService.create(category, articleTitle, text);
+        Article article = articlesService.createArticle(category, articleTitle, text);
 
         String expectedArticleTextPath = Config.ROOT_DIRECTORY
                 + "articles_service" + File.separator
@@ -87,15 +85,15 @@ public class ArticlesServiceImplTest {
         TxtFile textTxtFile = new TxtFile(textFile);
         assertEquals("My test text!..", textTxtFile.readString());
     }
-    
+
     @Test
     public void create_ArticleTest_check_creation_time() {
         Title categoryTitle = new Title("category unnecessary");
         Title articleTitle = new Title("title unnecessary");
         Text text = new Text("My test text!..");
-        Category category = articlesService.create(categoryTitle);
+        Category category = articlesService.createCategory(categoryTitle);
 
-        Article article = articlesService.create(category, articleTitle, text);
+        Article article = articlesService.createArticle(category, articleTitle, text);
 
         String expectedArticleTextPath = Config.ROOT_DIRECTORY
                 + "articles_service" + File.separator
@@ -107,9 +105,32 @@ public class ArticlesServiceImplTest {
         File textFile = new File(expectedArticleTextPath);
         assertTrue(textFile.exists());
 
-        TxtFile textTxtFile = new TxtFile(textFile);
-        String savedTime= textTxtFile.readString();
-        String actualTime = article.getCreationTime().getValue();
-        assertEquals(actualTime, savedTime);
+        TxtFile creationTimeFile = new TxtFile(textFile);
+        String actualCreationTime = article.getCreationTime().getYyyyMMddHHmmss();
+        assertEquals(actualCreationTime, creationTimeFile.readString());
+    }
+
+    @Test
+    public void findCategory() {
+        Title categoryTitle = new Title("Test category");
+        Alias categoryAlias = categoryTitle.createAlias();
+        Category categoryExpected = articlesService.createCategory(categoryTitle);
+
+        Category categoryActual = articlesService.findCategory(categoryAlias);
+
+        assertEquals(categoryExpected.getAbsolutePath(), categoryActual.getAbsolutePath());
+    }
+
+    @Test
+    public void findArticle() {
+        Title categoryTitle = new Title("category unnecessary");
+        Title articleTitle = new Title("title unnecessary");
+        Text text = new Text("text unnecessary");
+        Category category = articlesService.createCategory(categoryTitle);
+        Article articleExpected = articlesService.createArticle(category, articleTitle, text);
+
+        Article articleActual = articlesService.findArticle(category.getAlias(), articleTitle.createAlias());
+
+        assertEquals(articleExpected.getAbsolutePath(), articleActual.getAbsolutePath());
     }
 }

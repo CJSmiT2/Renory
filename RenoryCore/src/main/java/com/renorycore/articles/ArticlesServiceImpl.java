@@ -1,6 +1,7 @@
 package com.renorycore.articles;
 
 import com.renorycore.common.PathCreator;
+import com.renorycore.common.exception.ObjectNotFoundException;
 import com.renorycore.common.interfaces.ArticlesService;
 import com.renorycore.common.model.filesystem.FolderCms;
 import com.renorycore.common.model.text.Alias;
@@ -29,17 +30,31 @@ public class ArticlesServiceImpl extends FolderCms implements ArticlesService {
     }
 
     @Override
-    public Category create(Title title) {
+    public Category createCategory(Title title) {
         Alias alias = title.createAlias();
         String uniqeFolderName = new PathCreator().createUniqueFolderName(categoriesFolder, alias);
         return new Category(categoriesFolder + File.separator + uniqeFolderName, title);
     }
 
     @Override
-    public Article create(Category category, Title title, Text text) {
-        Article article = new Article(title, text);
-        article.serialization(category);
-        return article;
+    public Category findCategory(Alias alias) {
+        for (FolderCms folder : categoriesFolder.getFolders()) {
+            if (folder.getAlias().getValue().equals(alias.getValue())) {
+                return new Category(folder);
+            }
+        }
+        throw new ObjectNotFoundException("Cant found Category by alias = '" + alias.getValue() + "'");
+    }
+
+    @Override
+    public Article createArticle(Category category, Title title, Text text) {
+        return category.createArticle(title, text);
+    }
+
+    @Override
+    public Article findArticle(Alias categoryAlias, Alias articleAlias) {
+        Category category = findCategory(categoryAlias);
+        return category.findArticle(articleAlias);
     }
 
 }

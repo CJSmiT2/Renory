@@ -18,6 +18,7 @@ public class Alias extends StringWrap {
     }
 
     public Alias() {
+        super(new TxtFileName(NAME));
     }
 
     public void createAlias(String value) {
